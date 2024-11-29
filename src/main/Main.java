@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
         SlangDictionary slangDictionary = new SlangDictionary();
         Scanner scanner = new Scanner(System.in);
-        slangDictionary.saveDefault();
 
         while (true) {
             System.out.println("\n--- Slang Dictionary Menu ---");
@@ -19,11 +18,12 @@ public class Main {
             System.out.println("5. Edit a slang word");
             System.out.println("6. Delete a slang word");
             System.out.println("7. Reset slang words to default");
-            System.out.println("8. Exit");
+            System.out.println("8. On this day slang word");
+            System.out.println("9. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume newline
 
             switch (choice) {
                 case 1:
@@ -48,6 +48,9 @@ public class Main {
                     slangDictionary.resetSlangWords();
                     break;
                 case 8:
+                    slangDictionary.randomSlangWord();
+                    break;
+                case 9:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;

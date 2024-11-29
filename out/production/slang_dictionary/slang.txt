@@ -723,7 +723,6 @@ CIB`Complete In Box
 CID`Acid| LSD
 CIG`Cigarette
 %)`Drunk| giddy
-test`keke
 CIO`Check It Out
 TKD`Taekwondo
 CIR`Committed Information Rate (minimum bandwidth)

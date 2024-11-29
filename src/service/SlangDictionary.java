@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class SlangDictionary {
@@ -137,5 +138,20 @@ public class SlangDictionary {
         FileManager.saveData("src/slang.txt", dictionary);
 
         System.out.println("Slang words have been reset to default.");
+    }
+    public void randomSlangWord() {
+        if (dictionary.isEmpty()) {
+            System.out.println("No slang words available.");
+            return;
+        }
+
+        Random rand = new Random();
+        Object[] slangWords = dictionary.keySet().toArray();
+        String randomWord = (String) slangWords[rand.nextInt(slangWords.length)];
+
+        String definition = dictionary.get(randomWord);
+
+        System.out.println("On this day slang word: ");
+        System.out.println(randomWord + ": " + definition);
     }
 }
