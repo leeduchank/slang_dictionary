@@ -12,7 +12,6 @@ public class FileManager {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println("Reading line: " + line);
 
                 String[] parts = line.split("`", 2);
                 if (parts.length == 2) {
@@ -40,4 +39,11 @@ public class FileManager {
             System.out.println("Error saving data: " + e.getMessage());
         }
     }
+    public static void saveDefaultData(Map<String, String> dictionary) {
+        saveData("src/slang_default.txt", dictionary);
+    }
+    public static Map<String, String> loadDefaultData() {
+        return loadData("src/slang_default.txt");
+    }
 }
+

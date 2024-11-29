@@ -2712,7 +2712,6 @@ WLM`Windows Live Messenger
 POPO`Police Officer(s)
 BFFE`Best Friends Forever
 FKA`Formerly Known As
-tét`hehe
 PONR`Point Of No Return
 AD HOC`For the specific purpose| Improvised| impromptu
 MFEO`Made For Each Other

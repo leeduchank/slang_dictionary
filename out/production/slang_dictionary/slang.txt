@@ -723,6 +723,7 @@ CIB`Complete In Box
 CID`Acid| LSD
 CIG`Cigarette
 %)`Drunk| giddy
+test`keke
 CIO`Check It Out
 TKD`Taekwondo
 CIR`Committed Information Rate (minimum bandwidth)
@@ -2712,7 +2713,6 @@ WLM`Windows Live Messenger
 POPO`Police Officer(s)
 BFFE`Best Friends Forever
 FKA`Formerly Known As
-tét`thisistest
 PONR`Point Of No Return
 AD HOC`For the specific purpose| Improvised| impromptu
 MFEO`Made For Each Other

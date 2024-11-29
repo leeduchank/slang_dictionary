@@ -18,6 +18,10 @@ public class SlangDictionary {
         searchHistory = new ArrayList<>();
     }
 
+    public void saveDefault(){
+        FileManager.saveDefaultData(dictionary);
+
+    }
     public void addSlangWord(Scanner scanner) {
         System.out.print("Enter new slang word: ");
         String word = scanner.nextLine();
@@ -82,7 +86,17 @@ public class SlangDictionary {
 
 
     public void editSlangWord(Scanner scanner) {
-
+        System.out.print("Enter slang word to edit: ");
+        String word = scanner.nextLine();
+        if (dictionary.containsKey(word)) {
+            System.out.print("Enter new definition: ");
+            String newDefinition = scanner.nextLine();
+            dictionary.put(word, newDefinition);
+            System.out.println("Word updated successfully.");
+            FileManager.saveData("src/slang.txt", dictionary);
+        } else {
+            System.out.println("Word not found.");
+        }
     }
     public void displaySearchHistory() {
         if (searchHistory.isEmpty()) {
@@ -95,5 +109,33 @@ public class SlangDictionary {
         }
     }
 
+    // Xóa một từ lóng
+    public void deleteSlangWord(Scanner scanner) {
+        System.out.print("Enter slang word to delete: ");
+        String word = scanner.nextLine();
 
+        if (dictionary.containsKey(word)) {
+            System.out.println("Slang word '" + word + "' found. Do you want to delete it? (yes/no)");
+            String response = scanner.nextLine().toLowerCase();
+
+            if (response.equals("yes")) {
+                dictionary.remove(word);
+                System.out.println("Slang word '" + word + "' has been deleted.");
+                FileManager.saveData("src/slang.txt", dictionary);
+            } else {
+                System.out.println("No action taken. Slang word not deleted.");
+            }
+        } else {
+            System.out.println("Slang word not found.");
+        }
+    }
+    public void resetSlangWords() {
+        System.out.println("Resetting slang words to default...");
+
+        dictionary = FileManager.loadDefaultData();
+
+        FileManager.saveData("src/slang.txt", dictionary);
+
+        System.out.println("Slang words have been reset to default.");
+    }
 }
