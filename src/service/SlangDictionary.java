@@ -154,4 +154,44 @@ public class SlangDictionary {
         System.out.println("On this day slang word: ");
         System.out.println(randomWord + ": " + definition);
     }
+    public void randomSlangWordWithChoices() {
+        if (dictionary.isEmpty()) {
+            System.out.println("No slang words available.");
+            return;
+        }
+
+        Random rand = new Random();
+
+        Object[] slangWords = dictionary.keySet().toArray();
+        String randomWord = (String) slangWords[rand.nextInt(slangWords.length)];
+
+        String correctDefinition = dictionary.get(randomWord);
+
+        List<String> incorrectDefinitions = new ArrayList<>();
+        while (incorrectDefinitions.size() < 3) {
+            String incorrectWord = (String) slangWords[rand.nextInt(slangWords.length)];
+            String incorrectDefinition = dictionary.get(incorrectWord);
+
+            if (!incorrectWord.equals(randomWord) && !incorrectDefinitions.contains(incorrectDefinition)) {
+                incorrectDefinitions.add(incorrectDefinition);
+            }
+        }
+
+        System.out.println("What does the slang word \"" + randomWord + "\" mean?");
+        System.out.println("1. " + correctDefinition);
+        System.out.println("2. " + incorrectDefinitions.get(0));
+        System.out.println("3. " + incorrectDefinitions.get(1));
+        System.out.println("4. " + incorrectDefinitions.get(2));
+
+        System.out.print("Choose your answer (1-4): ");
+        Scanner scanner = new Scanner(System.in);
+        int userChoice = scanner.nextInt();
+
+        if (userChoice == 1) {
+            System.out.println("Correct!");
+        } else {
+            System.out.println("Incorrect. The correct definition is: " + correctDefinition);
+        }
+    }
+
 }
