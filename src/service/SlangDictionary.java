@@ -1,18 +1,22 @@
 package service;
 
+import model.SlangWord;
 import util.FileManager;
 
 import java.util.Map;
 import java.util.Scanner;
-
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class SlangDictionary {
     private Map<String, String> dictionary;
+    private List<String> searchHistory; // Lưu lịch sử tìm kiếm từ lóng
 
 
     public SlangDictionary() {
         dictionary = FileManager.loadData("src/slang.txt");
+        searchHistory = new ArrayList<>(); // Khởi tạo danh sách lịch sử tìm kiếm
 
     }
 
@@ -26,6 +30,8 @@ public class SlangDictionary {
         String definition = dictionary.get(word);
         if (definition != null) {
             System.out.println("Definition: " + definition);
+            searchHistory.add(word);
+
         } else {
             System.out.println("Slang word not found.");
         }
@@ -39,6 +45,8 @@ public class SlangDictionary {
             if (entry.getValue().toLowerCase().contains(keyword)) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());  // In ra từ lóng và định nghĩa
                 found = true;
+                searchHistory.add(entry.getKey());
+
             }
         }
 
@@ -54,7 +62,14 @@ public class SlangDictionary {
 
     }
     public void displaySearchHistory() {
-
+        if (searchHistory.isEmpty()) {
+            System.out.println("No search history.");
+        } else {
+            System.out.println("Search History:");
+            for (String word : searchHistory) {
+                System.out.println(word);
+            }
+        }
     }
 
 
