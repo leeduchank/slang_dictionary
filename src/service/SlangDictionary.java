@@ -1,6 +1,5 @@
 package service;
 
-import model.SlangWord;
 import util.FileManager;
 
 import java.util.Map;
@@ -11,17 +10,41 @@ import java.util.ArrayList;
 
 public class SlangDictionary {
     private Map<String, String> dictionary;
-    private List<String> searchHistory; // Lưu lịch sử tìm kiếm từ lóng
+    private List<String> searchHistory;
 
 
     public SlangDictionary() {
         dictionary = FileManager.loadData("src/slang.txt");
-        searchHistory = new ArrayList<>(); // Khởi tạo danh sách lịch sử tìm kiếm
-
+        searchHistory = new ArrayList<>();
     }
 
     public void addSlangWord(Scanner scanner) {
+        System.out.print("Enter new slang word: ");
+        String word = scanner.nextLine();
+        System.out.print("Enter its definition: ");
+        String definition = scanner.nextLine();
 
+        if (dictionary.containsKey(word)) {
+            System.out.println("Slang word already exists. Do you want to overwrite? (yes/no) Or create a new slang word? (new)");
+            String response = scanner.nextLine().toLowerCase();
+
+            if (response.equals("yes")) {
+                dictionary.put(word, definition);
+                System.out.println("Word overwritten.");
+            } else if (response.equals("new")) {
+
+                String newWord = word + "_new";
+                dictionary.put(newWord, definition);
+                System.out.println("New slang word added: " + newWord);
+            } else {
+                System.out.println("Word not added.");
+            }
+        } else {
+            dictionary.put(word, definition);
+            System.out.println("Word added successfully.");
+        }
+
+        FileManager.saveData("src/slang.txt", dictionary);
     }
 
     public void searchByWord(Scanner scanner) {
@@ -43,7 +66,7 @@ public class SlangDictionary {
 
         for (Map.Entry<String, String> entry : dictionary.entrySet()) {
             if (entry.getValue().toLowerCase().contains(keyword)) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());  // In ra từ lóng và định nghĩa
+                System.out.println(entry.getKey() + ": " + entry.getValue());
                 found = true;
                 searchHistory.add(entry.getKey());
 
