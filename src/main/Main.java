@@ -20,11 +20,12 @@ public class Main {
             System.out.println("7. Reset slang words to default");
             System.out.println("8. On this day slang word");
             System.out.println("9. Random slang word with choices");
-            System.out.println("10. Exit");
+            System.out.println("10. Random definition with choices");
+            System.out.println("11. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume newline
 
             switch (choice) {
                 case 1:
@@ -55,6 +56,9 @@ public class Main {
                     slangDictionary.randomSlangWordWithChoices();  // Hiển thị từ lóng ngẫu nhiên với các lựa chọn
                     break;
                 case 10:
+                    slangDictionary.randomDefinitionWithChoices();  // Hiển thị định nghĩa ngẫu nhiên với các lựa chọn
+                    break;
+                case 11:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;

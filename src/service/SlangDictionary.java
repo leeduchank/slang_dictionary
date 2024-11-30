@@ -194,4 +194,52 @@ public class SlangDictionary {
         }
     }
 
+    public void randomDefinitionWithChoices() {
+        if (dictionary.isEmpty()) {
+            System.out.println("No slang words available.");
+            return;
+        }
+
+        Random rand = new Random();
+
+        Object[] definitions = dictionary.values().toArray();
+        String correctDefinition = (String) definitions[rand.nextInt(definitions.length)];
+
+        List<String> incorrectSlangWords = new ArrayList<>();
+        while (incorrectSlangWords.size() < 3) {
+            String incorrectWord = (String) dictionary.keySet().toArray()[rand.nextInt(dictionary.size())];
+            String incorrectDefinition = dictionary.get(incorrectWord);
+
+            if (!incorrectDefinition.equals(correctDefinition) && !incorrectSlangWords.contains(incorrectWord)) {
+                incorrectSlangWords.add(incorrectWord);
+            }
+        }
+
+        System.out.println("What slang word matches the following definition?");
+        System.out.println("Definition: " + correctDefinition);
+        System.out.println("1. " + findKeyByValue(correctDefinition));
+        System.out.println("2. " + incorrectSlangWords.get(0));
+        System.out.println("3. " + incorrectSlangWords.get(1));
+        System.out.println("4. " + incorrectSlangWords.get(2));
+
+        System.out.print("Choose your answer (1-4): ");
+        Scanner scanner = new Scanner(System.in);
+        int userChoice = scanner.nextInt();
+
+        if (userChoice == 1) {
+            System.out.println("Correct! The slang word for the definition \"" + correctDefinition + "\" is: " + findKeyByValue(correctDefinition));
+        } else {
+            System.out.println("Incorrect. The correct slang word for the definition \"" + correctDefinition + "\" is: " + findKeyByValue(correctDefinition));
+        }
+    }
+
+    private String findKeyByValue(String value) {
+        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
 }
